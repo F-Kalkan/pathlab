@@ -20,3 +20,5 @@ export type SearchResult = {
     pathLength: number
     pathCost: number | null
 }
+
+export type CellId = string
