@@ -1,13 +1,14 @@
 import { expect, test } from 'vitest'
 import { bfs } from '../src/algorithms/bfs'
 import { parseMap } from '../src/grid/parseMap'
+import { isValidPath } from './helpers'
 
 // Test 1
 test('visits cells ring by ring in up, right, down, left order', () => {
     const map = parseMap(`
-S.
-.G
-`)
+        S.
+        .G
+    `)
     const result = bfs(map.grid, map.start, map.goal)
     expect(result.found).toBe(true)
     expect(result.visitedOrder).toEqual([
@@ -23,9 +24,9 @@ S.
 // Test 2
 test('stops with found false when the goal cannot be reached', () => {
     const map = parseMap(`
-S.#.
-..#G
-`)
+        S.#.
+        ..#G
+    `)
     const result = bfs(map.grid, map.start, map.goal)
     expect(result.found).toBe(false)
     expect(result.visitedOrder).toEqual([
@@ -42,9 +43,9 @@ S.#.
 // Test 3
 test('finds the goal at once when start and goal are the same cell', () => {
     const map = parseMap(`
-S.#.
-..#G
-`)
+        S.#.
+        ..#G
+    `)
     const result = bfs(map.grid, map.start, map.start)
     expect(result.found).toBe(true)
     expect(result.visitedOrder).toEqual([{ row: 0, col: 0 }])
@@ -56,12 +57,12 @@ S.#.
 // Test 4
 test('finds an 8-step path across an open 5x5 grid', () => {
     const map = parseMap(`
-S....
-.....
-.....
-.....
-....G
-`)
+        S....
+        .....
+        .....
+        .....
+        ....G
+    `)
     const result = bfs(map.grid, map.start, map.goal)
     expect(result.pathLength).toBe(8)
     expect(result.pathCost).toBe(8)
@@ -72,8 +73,8 @@ S....
 // Test 5
 test('finds a 1-step path when start and goal are side by side', () => {
     const map = parseMap(`
-SG
-`)
+        SG
+    `)
     const result = bfs(map.grid, map.start, map.goal)
     expect(result.pathLength).toBe(1)
     expect(result.pathCost).toBe(1)
@@ -81,4 +82,19 @@ SG
         { row: 0, col: 0 },
         { row: 0, col: 1 },
     ])
+})
+
+// Test 6
+test('finds a valid path through a winding map', () => {
+    const map = parseMap(`
+        S#...
+        .#.#.
+        .#.#.
+        ...#G
+    `)
+    const result = bfs(map.grid, map.start, map.goal)
+    expect(result.found).toBe(true)
+    expect(isValidPath(map.grid, result.path, map.start, map.goal)).toBe(true)
+    expect(result.pathLength).toBe(13)
+    expect(result.pathCost).toBe(13)
 })
