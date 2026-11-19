@@ -1,5 +1,6 @@
 import { toCellId } from '../grid/cellId'
 import { getNeighbors } from '../grid/neighbors'
+import { reconstructPath } from '../grid/path'
 import type { CellId, Grid, Position, SearchResult } from '../grid/types'
 import { Queue } from '../structures/queue'
 
@@ -10,6 +11,7 @@ export function bfs(grid: Grid, start: Position, goal: Position): SearchResult {
     seen.add(toCellId(start))
     const visitedOrder: Position[] = []
     let found = false
+    const cameFrom = new Map<CellId, Position>()
 
     while (!queue.isEmpty()) {
         const current = queue.dequeue()
@@ -19,11 +21,16 @@ export function bfs(grid: Grid, start: Position, goal: Position): SearchResult {
             found = true
             break
         }
+
         for (const next of getNeighbors(grid, current)) {
             if (seen.has(toCellId(next))) continue
             seen.add(toCellId(next))
             queue.enqueue(next)
+            cameFrom.set(toCellId(next), current)
         }
     }
-    return { found, visitedOrder, path: [], pathLength: 0, pathCost: null }
+    const path = found ? reconstructPath(cameFrom, goal) : []
+    const pathLength = found ? path.length - 1 : 0
+    const pathCost = found ? pathLength * 1 : null
+    return { found, visitedOrder, path, pathLength, pathCost }
 }
