@@ -1,11 +1,12 @@
 import { expect, test } from 'vitest'
 import { parseMap } from '../src/grid/parseMap'
 
+// Test 1
 test('reads size, start, goal and walls from a text map', () => {
     const result = parseMap(`
-S..#.
-.#...
-...#G
+        S..#.
+        .#...
+        ...#G
 `)
     expect(result.grid.length).toBe(3)
     expect(result.grid[0].length).toBe(5)
@@ -15,10 +16,20 @@ S..#.
     expect(result.grid[0][1].isWall).toBe(false)
 })
 
+// Test 2
 test('throws when the map has no start', () => {
     expect(() => parseMap(`.#.G`)).toThrow('no start')
 })
 
+// Test 3
 test('throws when the map has no goal', () => {
     expect(() => parseMap(`S.#.`)).toThrow('no goal')
+})
+
+// Test 4
+test('throws when rows have different lengths', () => {
+    expect(() => parseMap(`
+        S.
+        ...G
+    `)).toThrow(`Row 1 has 4 cells, expected 2`)
 })

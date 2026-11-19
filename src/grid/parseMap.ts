@@ -8,7 +8,7 @@ export type ParsedMap = {
 }
 
 export function parseMap(text: string): ParsedMap {
-    const lines = text.trim().split('\n')
+    const lines = text.trim().split('\n').map(line => line.trim())
     const rows = lines.length
     const cols = lines[0].length
 
@@ -17,6 +17,7 @@ export function parseMap(text: string): ParsedMap {
     let goal: Position | undefined = undefined
 
     for (let r = 0; r < rows; r++) {
+        if (lines[r].length !== cols) throw new Error(`Row ${r} has ${lines[r].length} cells, expected ${cols}`)
         for (let c = 0; c < cols; c++) {
             const ch = lines[r][c]
             if (ch === '#') walls.push({ row: r, col: c })
