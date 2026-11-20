@@ -2,7 +2,7 @@
 
 PathLab is a web application that demonstrates the behavior of graph search and shortest-path algorithms on an interactive grid-based map: **BFS, DFS, Dijkstra and A\***.
 
-> **Work in progress.** Min-heap is done and tested; Dijkstra, A\* and the user interface are next.
+> **Work in progress.** Dijkstra and A\* are done and tested; interactive grid, animation and the user interface are next.
 
 ## Planned features
 
@@ -19,7 +19,7 @@ PathLab is a web application that demonstrates the behavior of graph search and 
 - [x] Queue and stack
 - [x] Min-heap
 - [x] BFS and DFS
-- [ ] Dijkstra and A\*
+- [x] Dijkstra and A\*
 - [ ] Interactive grid and animation
 - [ ] Live demo
 
