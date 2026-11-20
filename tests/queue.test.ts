@@ -1,6 +1,7 @@
 import { expect, test } from 'vitest'
 import { Queue } from '../src/structures/queue'
 
+// Test 1
 test('dequeues items in the order they were added', () => {
     const queue = new Queue<number>()
     queue.enqueue(1)
@@ -12,11 +13,13 @@ test('dequeues items in the order they were added', () => {
     expect(queue.dequeue()).toBe(undefined)
 })
 
+// Test 2
 test('returns undefined when dequeuing an empty queue', () => {
     const queue = new Queue<number>()
     expect(queue.dequeue()).toBe(undefined)
 })
 
+// Test 3
 test('isEmpty is true at start, false after enqueue, true again after dequeue', () => {
     const queue = new Queue<number>()
     expect(queue.isEmpty()).toBe(true)
@@ -26,6 +29,7 @@ test('isEmpty is true at start, false after enqueue, true again after dequeue', 
     expect(queue.isEmpty()).toBe(true)
 })
 
+// Test 4
 test('keeps the order when enqueue and dequeue are mixed', () => {
     const queue = new Queue<number>()
     queue.enqueue(1)
