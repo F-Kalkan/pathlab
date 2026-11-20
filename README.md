@@ -2,7 +2,7 @@
 
 PathLab is a web application that demonstrates the behavior of graph search and shortest-path algorithms on an interactive grid-based map: **BFS, DFS, Dijkstra and A\***.
 
-> **Work in progress.** The grid model is done and tested; the algorithms and the user interface are next.
+> **Work in progress.** BFS and DFS are done and tested; Dijkstra, A\* and the user interface are next.
 
 ## Planned features
 
@@ -16,14 +16,16 @@ PathLab is a web application that demonstrates the behavior of graph search and 
 
 - [x] Grid model: cells, walls and bounds checking
 - [x] Four-way neighbor search in a fixed order (up, right, down, left)
-- [ ] Queue, stack and min-heap
-- [ ] BFS, DFS, Dijkstra and A\*
+- [x] Queue and stack
+- [ ] Min-heap
+- [x] BFS and DFS
+- [ ] Dijkstra and A\*
 - [ ] Interactive grid and animation
 - [ ] Live demo
 
 ## Tech stack
 
-TypeScript · React · Vite · Vitest
+TypeScript · React · Vite · Vitest · GitHub Actions
 
 ## Getting started
 
@@ -37,6 +39,8 @@ npm run lint     # check the code style
 ## Project structure
 
 ```text
-src/grid/    grid types, grid creation and neighbor search
-tests/       unit tests
+src/grid/        grid types, map parsing, neighbor search and path rebuilding
+src/structures/  queue and stack
+src/algorithms/  search algorithms
+tests/           unit tests
 ```
