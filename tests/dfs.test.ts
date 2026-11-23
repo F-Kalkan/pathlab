@@ -74,3 +74,17 @@ test('finds a valid path through a winding map', () => {
     expect(result.pathLength).toBe(13)
     expect(result.pathCost).toBe(13)
 })
+
+// Test 5
+test('finds a 1-step path when start and goal are side by side', () => {
+    const map = parseMap(`
+        SG
+    `)
+    const result = dfs(map.grid, map.start, map.goal)
+    expect(result.pathLength).toBe(1)
+    expect(result.pathCost).toBe(1)
+    expect(result.path).toEqual([
+        { row: 0, col: 0 },
+        { row: 0, col: 1 },
+    ])
+})

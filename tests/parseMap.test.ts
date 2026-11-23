@@ -33,3 +33,27 @@ test('throws when rows have different lengths', () => {
         ...G
     `)).toThrow(`Row 1 has 4 cells, expected 2`)
 })
+
+// Test 5
+test('throws when the map has an unknown character', () => {
+    expect(() => parseMap(`
+        s...
+        ...G
+    `)).toThrow(`Map has invalid character`)
+})
+
+// Test 6
+test('throws when the map has more than one start', () => { 
+    expect(() => parseMap(`
+        S..S
+        ...G
+    `)).toThrow(`Map has more than one start`)
+})
+
+// Test 7
+test('throws when the map has more than one goal', () => {
+    expect(() => parseMap(`
+        S...
+        G..G
+    `)).toThrow(`Map has more than one goal`)
+})

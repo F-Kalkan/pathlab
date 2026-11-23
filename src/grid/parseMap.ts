@@ -21,11 +21,22 @@ export function parseMap(text: string): ParsedMap {
         for (let c = 0; c < cols; c++) {
             const ch = lines[r][c]
             if (ch === '#') walls.push({ row: r, col: c })
-            if (ch === 'S') start = { row: r, col: c }
-            if (ch === 'G') goal = { row: r, col: c }
+
+            else if (ch === 'S') {
+                if (start !== undefined) { throw new Error(`Map has more than one start (S), another one at row ${r}, col ${c}`) }
+                else { start = { row: r, col: c } }
+            }
+
+            else if (ch === 'G') {
+                if (goal !== undefined) { throw new Error(`Map has more than one goal (G), another one at row ${r}, col ${c}`) }
+                else { goal = { row: r, col: c } }
+            }
+
+            else if (ch === '.') { continue }
+
+            else { throw new Error(`Map has invalid character ${ch} at row ${r}, col ${c}`) }
         }
     }
-
     if (start === undefined) throw new Error('Map has no start (S)')
     if (goal === undefined) throw new Error('Map has no goal (G)')
 
