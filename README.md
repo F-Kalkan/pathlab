@@ -48,3 +48,7 @@ src/structures/  queue, stack and min-heap
 src/algorithms/  search algorithms and the function that runs them
 tests/           unit tests
 ```
+
+## License
+
+MIT
