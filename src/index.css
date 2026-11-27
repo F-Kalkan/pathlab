@@ -1,0 +1,14 @@
+.cell {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #e5e7eb;
+}
+
+.wall { background: #1f2937; }
+.start { background: #16a34a; }
+.goal { background: #dc2626; }
+.empty { background: #ffffff; }
+
+.grid {
+    display: grid;
+}
